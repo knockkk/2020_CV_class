@@ -12,8 +12,8 @@ def unpickle(file):
         dict = pickle.load(fo, encoding='bytes')
     return dict
 
-train_data = unpickle("../dataset/cifar-10-python/cifar-10-batches-py/data_batch_1");
-test_data = unpickle("../dataset/cifar-10-python/cifar-10-batches-py/test_batch");
+train_data = unpickle("../cifar-10-python/cifar-10-batches-py/data_batch_1");
+test_data = unpickle("../cifar-10-python/cifar-10-batches-py/test_batch");
 
 
 # #### 测试数据集
@@ -34,7 +34,7 @@ print("data size:",train_data_pic.shape)
 def get_label_count(labels): 
     unique_data = np.unique(labels)
     for label in unique_data:
-        print(label,": ",labels.count(label))
+        print(label, ": ", labels.count(label))
 get_label_count(train_data_labels)
 
 
