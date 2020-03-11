@@ -15,19 +15,23 @@ class Softmax(object):
             self.W = 0.001 * np.random.randn(num_classes, num_dim)
 
         loss_history = []
+
+        # learning_rate = 0.01
         for i in range(num_iter):
             # Mini batch
             sample_index = np.random.choice(num_train, batch_num, replace=False) #随机取batch_num个索引
             X_batch = X[sample_index, :]
             y_batch = y[sample_index]
 
-            loss, gred = self.softmax_cost_function(X_batch, y_batch)
+            loss, gradient = self.softmax_cost_function(X_batch, y_batch)
             loss_history.append(loss)
 
-            self.W -= learning_rate * gred
+            self.W -= learning_rate * gradient
 
+            # if(i%2000 == 0 and learning_rate>1e-4):
+            #     learning_rate =  learning_rate / 2
             if i % 500 == 0:
-                print('Iteration %d / %d: loss %f' % (i, num_iter, loss))
+                print('Iteration %d / %d, learning rate %f : loss %f' % (i, num_iter,learning_rate, loss))
 
         return loss_history
 
@@ -49,7 +53,9 @@ class Softmax(object):
         ground_true = np.zeros(scores.shape)
         ground_true[range(num_train), y] = 1
 
-        loss = -1 * np.sum(ground_true * np.log(pro_scores))  / num_train
-        gred = -1 * (ground_true - pro_scores).T.dot(X)  / num_train
-
+        reg = 0.1
+        loss = -1 * np.sum(ground_true * np.log(pro_scores))  / num_train 
+        gred = -1 * (ground_true - pro_scores).T.dot(X)  / num_train 
+        # loss = -1 * np.sum(ground_true * np.log(pro_scores))  / num_train   + 0.5 *reg* np.sum(self.W * self.W)
+        # gred = -1 * (ground_true - pro_scores).T.dot(X)  / num_train + reg*self.W
         return loss, gred
