@@ -45,8 +45,6 @@ class BPNetWork(object):
                 print('Iteration %d / %d, learning rate %10f , loss %f' %
                       (i, num_iter, learning_rate, loss))
 
-            # 连续 k 轮loss没有明显下降就提前停止训练
-
         # visualize loss
         self.visualizeLoss(loss_history)
 
