@@ -73,8 +73,8 @@ class BPNetWork(object):
         #使用不同的激活函数
         # a1 = np.tanh(z1)
         a1 = self.relu(z1)
-
-
+        # a1 = 1/(1+np.exp(-z1))
+        # a1 = z1
         z2 = a1.dot(self.W2)
         exp_scores = np.exp(z2)
         probs = (exp_scores / np.matrix(np.sum(exp_scores, axis=1)).T).getA()
