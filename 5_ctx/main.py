@@ -20,7 +20,7 @@ net_name = 'ResNet18'  # 模型类别
 load_model = False  # 是否读取模型
 save_model = True  # 是否保存模型
 is_show_misclassified = True  # 是否展示分类错误图片
-loss_func='' #损失函数,不指定时为默认
+loss_func='' #损失函数,不指定时为默认,可选'focal_loss'
 focal_gamma=2 # 
 
 
